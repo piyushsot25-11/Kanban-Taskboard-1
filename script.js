@@ -83,3 +83,44 @@ function renderBoard() {
   document.querySelector("#totalCount").textContent = totalTasks;
   addDragEvents();
 }
+
+// Create HTML for a task card
+function makeCard(task) {
+  let card = "";
+  card = card + '<article class="card" draggable="true" data-id="' + task.id + '">';
+  card = card + "<h3>" + cleanText(task.title) + "</h3>";
+
+  if (task.description === "") {
+    card = card + "<p>No description</p>";
+  } else {
+    card = card + "<p>" + cleanText(task.description) + "</p>";
+  }
+
+  card = card + "<div>";
+  card = card + '<button data-action="edit">Edit</button>';
+  card = card + '<button data-action="delete">Delete</button>';
+  card = card + "</div>";
+  card = card + "</article>";
+  return card;
+}
+
+// Attach drag events to all cards
+function addDragEvents() {
+  let cards = document.querySelectorAll(".card");
+
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener("dragstart", dragStart);
+    cards[i].addEventListener("dragend", dragEnd);
+  }
+}
+
+// Open modal to add a new task
+function openAddModal() {
+  taskIdInput.value = "";
+  titleInput.value = "";
+  descriptionInput.value = "";
+  error.textContent = "";
+  document.querySelector("#modalTitle").textContent = "Add Task";
+  modal.showModal();
+}
+
