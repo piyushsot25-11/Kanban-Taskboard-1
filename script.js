@@ -124,3 +124,12 @@ function openAddModal() {
   modal.showModal();
 }
 
+// Open modal to edit an existing task
+function openEditModal(task) {
+  taskIdInput.value = task.id;
+  titleInput.value = task.title;
+  descriptionInput.value = task.description;
+  error.textContent = "";
+  document.querySelector("#modalTitle").textContent = "Edit Task";
+  modal.showModal();
+}
