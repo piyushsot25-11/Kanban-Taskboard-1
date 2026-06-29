@@ -13,3 +13,10 @@ const demoTasks = [
 let savedTasks = localStorage.getItem(STORAGE_KEY);
 let tasks;
 let draggedId = "";
+
+// Use demo tasks if no saved data exists
+if (savedTasks === null) {
+  tasks = demoTasks;
+} else {
+  tasks = JSON.parse(savedTasks);
+}
