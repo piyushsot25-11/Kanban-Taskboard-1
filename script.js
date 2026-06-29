@@ -20,3 +20,10 @@ if (savedTasks === null) {
 } else {
   tasks = JSON.parse(savedTasks);
 }
+
+// Get required DOM elements
+const modal = document.querySelector("#taskModal");
+const titleInput = document.querySelector("#title");
+const descriptionInput = document.querySelector("#description");
+const taskIdInput = document.querySelector("#taskId");
+const error = document.querySelector("#error");
