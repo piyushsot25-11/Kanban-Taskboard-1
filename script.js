@@ -84,6 +84,7 @@ function renderBoard() {
   addDragEvents();
 }
 
+
 // Create HTML for a task card
 function makeCard(task) {
   let card = "";
@@ -195,3 +196,47 @@ function handleCardButtons(event) {
     deleteTask(task);
   }
 }
+
+// Find a task using its ID
+function findTask(id) {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      return tasks[i];
+    }
+  }
+}
+
+// Delete a task after confirmation
+function deleteTask(task) {
+  let answer = confirm('Delete "' + task.title + '"');
+
+  if (answer === false) {
+    return;
+  }
+
+  let newTasks = [];
+
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id !== task.id) {
+      newTasks.push(tasks[i]);
+    }
+  }
+
+  tasks = newTasks;
+  saveToLocalStorage();
+  renderBoard();
+}
+
+// Start dragging a task card
+function dragStart(event) {
+  draggedId = event.currentTarget.dataset.id;
+  event.dataTransfer.setData("text/plain", draggedId);
+  event.currentTarget.classList.add("dragging");
+}
+
+// Remove drag styles after dragging ends
+function dragEnd(event) {
+  event.currentTarget.classList.remove("dragging");
+  clearDropStyles();
+}
+
