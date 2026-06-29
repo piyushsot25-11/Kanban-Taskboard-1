@@ -171,3 +171,27 @@ function saveTask() {
   renderBoard();
   closeModal();
 }
+
+// Handle edit and delete button clicks
+function handleCardButtons(event) {
+  let button = event.target.closest("button");
+  let card = event.target.closest(".card");
+
+  if (button === null) {
+    return;
+  }
+
+  if (card === null) {
+    return;
+  }
+
+  let task = findTask(card.dataset.id);
+
+  if (button.dataset.action === "edit") {
+    openEditModal(task);
+  }
+
+  if (button.dataset.action === "delete") {
+    deleteTask(task);
+  }
+}
