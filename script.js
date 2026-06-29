@@ -240,3 +240,52 @@ function dragEnd(event) {
   clearDropStyles();
 }
 
+// Allow dropping into a column
+function allowDrop(event) {
+  event.preventDefault();
+  event.currentTarget.classList.add("over");
+}
+
+// Remove highlight from drop zone
+function removeDropStyle(event) {
+  event.currentTarget.classList.remove("over");
+}
+
+// Move a task to a new column
+function dropTask(event) {
+  event.preventDefault();
+  let newStatus = event.currentTarget.dataset.status;
+  let id = event.dataTransfer.getData("text/plain");
+
+  if (id === "") {
+    id = draggedId;
+  }
+
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      tasks[i].status = newStatus;
+    }
+  }
+
+  saveToLocalStorage();
+  renderBoard();
+}
+
+// Remove drop highlight from all columns
+function clearDropStyles() {
+  let zones = document.querySelectorAll(".tasks");
+
+  for (let i = 0; i < zones.length; i++) {
+    zones[i].classList.remove("over");
+  }
+}
+
+// Escape special characters for safe HTML display
+function cleanText(text) {
+  text = text.replace(/&/g, "&amp;");
+  text = text.replace(/</g, "&lt;");
+  text = text.replace(/>/g, "&gt;");
+  text = text.replace(/"/g, "&quot;");
+  text = text.replace(/'/g, "&#039;");
+  return text;
+}
