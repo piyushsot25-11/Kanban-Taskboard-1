@@ -8,3 +8,8 @@ const demoTasks = [
   { id: "2", title: "Drag cards", description: "Move cards using HTML5 drag and drop.", status: "progress" },
   { id: "3", title: "Save data", description: "Persist tasks in localStorage.", status: "done" },
 ];
+
+// Load tasks from local storage
+let savedTasks = localStorage.getItem(STORAGE_KEY);
+let tasks;
+let draggedId = "";
