@@ -34,3 +34,52 @@ document.querySelector("#cancelBtn").addEventListener("click", closeModal);
 document.querySelector("#closeBtn").addEventListener("click", closeModal);
 document.querySelector("#saveBtn").addEventListener("click", saveTask);
 document.querySelector(".board").addEventListener("click", handleCardButtons);
+
+// Enable drag-and-drop for all task columns
+let taskZones = document.querySelectorAll(".tasks");
+
+for (let i = 0; i < taskZones.length; i++) {
+  taskZones[i].addEventListener("dragover", allowDrop);
+  taskZones[i].addEventListener("dragleave", removeDropStyle);
+  taskZones[i].addEventListener("drop", dropTask);
+}
+
+// Display tasks on page load
+renderBoard();
+
+// Save tasks to local storage
+function saveToLocalStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+}
+
+// Render all task columns and update counters
+function renderBoard() {
+  let totalTasks = 0;
+
+  for (let i = 0; i < columns.length; i++) {
+    let status = columns[i];
+    let zone = document.querySelector('[data-status="' + status + '"]');
+    let count = 0;
+    let cards = "";
+
+    for (let j = 0; j < tasks.length; j++) {
+      if (tasks[j].status === status) {
+        cards = cards + makeCard(tasks[j]);
+        count++;
+      }
+    }
+
+    if (count === 0) {
+      zone.innerHTML = '<p class="empty">No tasks here</p>';
+    } else {
+      zone.innerHTML = cards;
+    }
+
+    totalTasks = totalTasks + count;
+    document.querySelector("#" + status + "Count").textContent = count;
+    document.querySelector("#" + status + "Summary").textContent = count;
+  }
+
+  document.querySelector("#totalCount").textContent = totalTasks;
+  addDragEvents();
+}
