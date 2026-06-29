@@ -138,3 +138,36 @@ function openEditModal(task) {
 function closeModal() {
   modal.close();
 }
+
+// Add a new task or update an existing task
+function saveTask() {
+  let newTitle = titleInput.value.trim();
+  let newDescription = descriptionInput.value.trim();
+
+  if (newTitle.length < 3) {
+    error.textContent = "Title must be at least 3 characters.";
+    return;
+  }
+
+  if (taskIdInput.value === "") {
+    let newTask = {
+      id: String(Date.now()),
+      title: newTitle,
+      description: newDescription,
+      status: "todo",
+    };
+
+    tasks.push(newTask);
+  } else {
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].id === taskIdInput.value) {
+        tasks[i].title = newTitle;
+        tasks[i].description = newDescription;
+      }
+    }
+  }
+
+  saveToLocalStorage();
+  renderBoard();
+  closeModal();
+}
