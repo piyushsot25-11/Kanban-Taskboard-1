@@ -133,3 +133,8 @@ function openEditModal(task) {
   document.querySelector("#modalTitle").textContent = "Edit Task";
   modal.showModal();
 }
+
+// Close the task modal
+function closeModal() {
+  modal.close();
+}
