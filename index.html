@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanban Task Board</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">OJT JavaScript Capstone</p>
+        <h1>Kanban Task Board</h1>
+      </div>
+      <button class="btn primary" id="addBtn">Add Task</button>
+    </header>
+    
+    <section class="summary" aria-label="Task summary">
+      <article>
+        <strong id="totalCount">0</strong>
+        <span>Total tasks</span>
+      </article>
+      <article>
+        <strong id="todoSummary">0</strong>
+        <span>To do</span>
+      </article>
+      <article>
+        <strong id="progressSummary">0</strong>
+        <span>In progress</span>
+      </article>
+      <article>
+        <strong id="doneSummary">0</strong>
+        <span>Done</span>
+      </article>
+    </section>
+
+    <section class="board" aria-label="Kanban board">
+      <article class="column">
+        <h2>To Do <span id="todoCount">0</span></h2>
+        <div class="tasks" data-status="todo"></div>
+      </article>
+      <article class="column">
+        <h2>In Progress <span id="progressCount">0</span></h2>
+        <div class="tasks" data-status="progress"></div>
+      </article>
+      <article class="column">
+        <h2>Done <span id="doneCount">0</span></h2>
+        <div class="tasks" data-status="done"></div>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="taskModal">
+    <div id="taskPanel">
+      <div class="modalHead">
+        <h2 id="modalTitle">Add Task</h2>
+        <button class="iconBtn" type="button" id="cancelBtn" aria-label="Close">X</button>
+      </div>
+
+      <input type="hidden" id="taskId" />
+
+      <label for="title">Task title</label>
+      <input id="title" maxlength="60" placeholder="Example: Build drag and drop" required />
+
+      <label for="description">Description</label>
+      <textarea id="description" maxlength="180" placeholder="Write a short task note"></textarea>
+
+      <p id="error" role="alert"></p>
+      <div class="modalActions">
+        <button class="btn light" type="button" id="closeBtn">Cancel</button>
+        <button class="btn primary" type="button" id="saveBtn">Save Task</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
