@@ -27,3 +27,10 @@ const titleInput = document.querySelector("#title");
 const descriptionInput = document.querySelector("#description");
 const taskIdInput = document.querySelector("#taskId");
 const error = document.querySelector("#error");
+
+// Register button click events
+document.querySelector("#addBtn").addEventListener("click", openAddModal);
+document.querySelector("#cancelBtn").addEventListener("click", closeModal);
+document.querySelector("#closeBtn").addEventListener("click", closeModal);
+document.querySelector("#saveBtn").addEventListener("click", saveTask);
+document.querySelector(".board").addEventListener("click", handleCardButtons);
